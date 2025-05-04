@@ -1,0 +1,31 @@
+<div class="chat-room-container">
+  <div class="chat-header">
+    <button routerLink="/" class="back-button">← Voltar</button>
+    <h2>FuriaBot</h2>
+  </div>
+
+  <div class="chat-messages" #scrollContainer>
+    <div
+      *ngFor="let message of messages"
+      [ngClass]="{
+        'message-bubble': true,
+        'user': message.username === 'Usuário',
+        'bot': message.username === 'FuriaBot'
+      }"
+    >
+      <span class="sender">{{ message.username }}</span>
+      <p class="content">{{ message.content }}</p>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      type="text"
+      placeholder="Digite sua mensagem..."
+      [(ngModel)]="newMessage"
+      (keyup.enter)="sendMessage()"
+    />
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="sendMessage()">Enviar</button>
+  </div>
+</div>

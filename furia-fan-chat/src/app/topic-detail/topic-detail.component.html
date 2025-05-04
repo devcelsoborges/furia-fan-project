@@ -1,0 +1,45 @@
+<div class="forum-wrapper">
+  <div class="forum-header">
+    <h2>{{ topicDetail?.topic?.titulo }}</h2>
+    <div class="header-buttons">
+      <button class="new-topic-button">Responder</button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading">Carregando tópico...</div>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+  <div *ngIf="!isLoading && !topicDetail && !error">Tópico não encontrado ou erro ao carregar.</div>
+
+
+  <div *ngIf="topicDetail" class="forum-grid">
+    <div class="forum-topics">
+      <div class="forum-section">
+        <div class="forum-section-header">
+          {{ topicDetail.topic?.titulo }}
+          <small>por {{ topicDetail.topic?.autor }} em {{ topicDetail.topic?.dataPostagem | date:'short' }}</small>
+        </div>
+        <div *ngFor="let post of topicDetail.posts" class="forum-topic-card">
+          <div class="icon">
+             <div class="avatar"> {{ post.autor?.charAt(0) | uppercase }} </div>
+          </div>
+          <div class="content">
+            <div class="title">{{ post.autor }}</div>
+            <div class="description">{{ post.mensagem }}</div>
+          </div>
+          <div class="stats">
+            <div class="last-post">{{ post.dataHora | date:'short' }}</div>
+          </div>
+        </div>
+         <div *ngIf="topicDetail.posts?.length === 0">
+           Nenhuma resposta ainda. Seja o primeiro a responder!
+         </div>
+      </div>
+    </div>
+    <div class="forum-sidebar">
+      <div class="sidebar-card">
+        <h3>Informações Adicionais</h3>
+        <p>Total de Posts (incluindo inicial): {{ topicDetail.posts?.length || 0 }}</p>
+      </div>
+    </div>
+  </div>
+</div>

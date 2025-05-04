@@ -1,0 +1,71 @@
+<div class="forum-wrapper">
+  <div class="header-bar">
+    <button class="new-topic-button" [routerLink]="'/'">Voltar para Início</button>
+    <h2>Fóruns</h2>
+    <div class="header-buttons">
+       <button class="new-topic-button" (click)="iniciarNovoTopico()">Iniciar novo tópico</button>
+    </div>
+  </div>
+
+  <div *ngIf="showNewTopicForm" class="new-topic-form-container">
+    <h3>Criar Novo Tópico</h3>
+    <form (ngSubmit)="submitNewTopic()">
+      <div class="form-group">
+        <label for="author">Seu Nome:</label>
+        <input id="author" type="text" [(ngModel)]="newTopicAuthor" name="newTopicAuthor" required>
+      </div>
+      <div class="form-group">
+        <label for="title">Título do Tópico:</label>
+        <input id="title" type="text" [(ngModel)]="newTopicTitle" name="newTopicTitle" required>
+      </div>
+      <div class="form-group">
+        <label for="content">Conteúdo do Post Inicial:</label>
+        <textarea id="content" [(ngModel)]="initialPostContent" name="initialPostContent" rows="5" required></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="new-topic-button">Criar Tópico</button>
+        <button type="button" class="cancel-button" (click)="cancelNewTopic()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="forum-grid">
+    <div class="forum-topics">
+      <div class="forum-section">
+        <div class="forum-section-header">Mensagens da FURIA FanChat</div>
+        <div *ngIf="!showNewTopicForm">
+          <div class="forum-topic-card" *ngFor="let topic of topics">
+            <div class="icon">
+              <img src="assets/icon.png" alt="icon" />
+            </div>
+            <div class="content">
+              <div class="title"><a [routerLink]="['/forum', topic.id]">{{ topic.titulo }}</a></div>
+              <div class="description">{{ topic.descricao }}</div>
+            </div>
+            <div class="stats">
+              <div class="last-post">
+                <small>Por {{ topic.autor }}, {{ topic.dataPostagem }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="forum-sidebar">
+      <div class="sidebar-card">
+        <h3>Estatísticas de Usuários</h3>
+        <p><strong>Membros:</strong> {{ stats.members }}</p>
+        <p><strong>Recorde Online:</strong> {{ stats.record }}<br /><small>{{ stats.recordDate }}</small></p>
+        <div class="newest-member">
+          <div class="avatar">K</div>
+          <div>
+            <strong>MEMBRO MAIS NOVO</strong><br />
+            {{ stats.newestMember }}<br />
+            Registro em {{ stats.joinedAgo }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

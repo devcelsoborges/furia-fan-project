@@ -1,0 +1,56 @@
+<header class="header">
+  <nav class="nav-container">
+    <a href="https://www.furia.gg" target="_blank">🛒 Loja FURIA</a>
+    <a routerLink="/chat">💬 FanChat</a>
+    <a href="#sobre-nos">📖 Sobre Nós</a>
+    <a href="https://www.twitch.tv/team/furia" target="_blank">🎮 Twitch</a>
+    <a routerLink="/forum">🗫 Fórum</a>
+  </nav>
+</header>
+
+<div class="landing-container">
+  <img src="assets/FURIA-logo.png" alt="FURIA Logo" class="furia-logo" />
+  <h1>Bem-vindo ao FURIA FanChat</h1>
+  <p>Converse com o chat da FURIA e viva a experiência de ser um fã!</p>
+  <a routerLink="/chat" class="chat-button">Entrar no Chat</a>
+</div>
+
+<section class="matches-section">
+  <h2>Confrontos da Pantera</h2>
+  <p>Resultados recentes e próximos desafios</p>
+  <div class="matches-container">
+    <div *ngFor="let match of matchesToDisplay" class="match-card">
+      <div class="teams">
+        <img src="assets/FURIA-logo.png" alt="FURIA Logo" class="team-logo" />
+        <strong>FURIA</strong>
+        <span class="score">{{ match.result ? match.result : 'vs' }}</span>
+        <strong>{{ match.opponent }}</strong>
+        <img [src]="match.logoUrl" [alt]="'Logo do ' + match.opponent" class="team-logo" />
+      </div>
+      <p class="tournament">{{ match.tournament }}</p>
+      <p class="date">{{ match.date }}</p>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-message">
+      Carregando partidas...
+    </div>
+     <div *ngIf="noMatchesFound" class="loading-message">
+      Nenhuma partida encontrada.
+    </div>
+  </div>
+
+  <button
+    *ngIf="showMoreButtonVisible"
+    class="show-more-button"
+    (click)="toggleShowMatches()">
+    {{ showAllMatches ? 'Mostrar Menos' : 'Mostrar Mais' }}
+  </button>
+
+</section>
+
+<section id="sobre-nos" class="sobre-nos">
+  <h2>Sobre a FURIA</h2>
+  <p>
+    Nascida do sonho de levar o CS brasileiro ao topo, a FURIA expandiu-se para ser mais que esports, tornando-se um movimento sociocultural vibrante. Com garra e visão, inspiram, conectam e impactam positivamente a comunidade global. A pantera simboliza sua força e busca por glória. Baseados em excelência e compromisso social, celebram individualidades e constroem legados, um rugido de paixão no gaming e na sociedade.
+  </p>
+</section>
