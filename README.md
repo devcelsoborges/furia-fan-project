@@ -51,8 +51,7 @@ Siga estes passos para configurar o projeto localmente:
 Clone o Repositório:
 Bash
 
-git clone <URL_DO_SEU_REPOSITORIO_GITHUB>
-(Substitua <URL_DO_SEU_REPOSITORIO_GITHUB> pela URL do seu repositório após criá-lo no GitHub)
+git clone https://github.com/devcelsoborges/furia-fan-project.git
 Navegue até o Diretório do Projeto:
 Bash
 
@@ -61,7 +60,6 @@ Instale as Dependências:
 Bash
 
 npm install
-# ou use yarn: yarn install
 Executando a Aplicação
 Para iniciar o servidor de desenvolvimento local:
 
